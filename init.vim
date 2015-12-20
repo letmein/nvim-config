@@ -146,7 +146,14 @@ nnoremap <Leader><Esc> :bd!<CR>
 vmap <Enter> <Plug>(EasyAlign)
 
 " Show diff between 2 splits
-nnoremap <silent> <Leader>d :call DiffToggle()<CR>
+nnoremap <silent> <Leader>ds :call DiffToggle()<CR>
+
+" Fugitive git mappings
+nnoremap <silent> <Leader>gd :Gdiff<CR>
+nnoremap <silent> <Leader>gs :Gstatus<CR>
+nnoremap <silent> <Leader>gc :Gcommit<CR>
+nnoremap <silent> <Leader>gw :Gwrite<CR>
+nnoremap <silent> <Leader>gr :Gread<CR>
 
 " Insert the current filename with full path
 inoremap \fn <C-R>=expand("%:p")<CR>
