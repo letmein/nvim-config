@@ -67,37 +67,49 @@ function! DiffToggle()
   else
     windo diffthis
   endif
-:endfunction
-
-function! OpenRspec()
-  let current_file = expand("%")
-  exec ':below new'
-  exec ':terminal rspec ' . current_file
 endfunction
 
-function! OpenTestAlternate()
-  let new_file = AlternateForCurrentFile()
-  exec ':e ' . new_file
-endfunction
-
-function! AppToRspec(file_name)
-  let result = substitute(a:file_name, '\.rb$', '_spec.rb', '')
-  let result = substitute(result, '^app/', 'spec/', '')
-  return result
-endfunction
-
-function! RspecToApp(file_name)
-  let result = substitute(a:file_name, '_spec\.rb$', '.rb', '')
-  let result = substitute(result, '^spec/', 'app/', '')
-  return result
-endfunction
-
-function! AlternateForCurrentFile()
-  let current_file = expand("%")
-  if match(current_file, '^spec/') != -1
-    return RspecToApp(current_file)
+function! AlternateForRuby(file_name)
+  if a:file_name =~ '^spec/'
+    let result = substitute(a:file_name, '_spec\.rb$', '.rb', '')
+    return substitute(result, '^spec/', 'app/', '')
   else
-    return AppToRspec(current_file)
+    let result = substitute(a:file_name, '\.rb$', '_spec.rb', '')
+    return substitute(result, '^app/', 'spec/', '')
+  endif
+endfunction
+
+function! AlternateForCoffee(file_name)
+  if a:file_name =~ '^ui/spec/unit/'
+    let result = substitute(a:file_name, '_spec\.coffee$', '.coffee', '')
+    return substitute(result, '^ui/spec/unit/', 'ui/assets/javascripts/', '')
+  else
+    let result = substitute(a:file_name, '\.coffee$', '_spec.coffee', '')
+    return substitute(result, '^ui/assets/javascripts/', 'ui/spec/unit/', '')
+  endif
+endfunction
+
+function! OpenAlternate(file_name)
+  let alt_file = a:file_name
+  if alt_file =~ '\.rb$'
+    let alt_file = AlternateForRuby(alt_file)
+  elseif alt_file =~ '\.coffee$'
+    let alt_file = AlternateForCoffee(alt_file)
+  endif
+  exec ':e ' . alt_file
+endfunction
+
+function! RunTest(file_name)
+  let file_name = a:file_name
+  if file_name =~ '\.rb$'
+    if file_name !~ '^spec/'
+      let file_name = AlternateForRuby(file_name)
+    endif
+    exec ':below new'
+    exec ':terminal rspec ' . file_name
+  elseif file_name =~ '\.coffee$'
+    exec ':below new'
+    exec ':terminal npm run test-unit'
   endif
 endfunction
 
@@ -130,10 +142,10 @@ nnoremap <silent> <Leader>d :call DiffToggle()<CR>
 " Insert the current filename with full path
 inoremap \fn <C-R>=expand("%:p")<CR>
 
-nnoremap <Leader>r :call OpenRspec()<CR>
+nnoremap <Leader>t :call RunTest(expand('%'))<CR>
 
 " Search the selected text with Ag
 vnoremap // y :Ag <C-R>"<CR>
 
 " Switch between a Ruby class and its spec
-nnoremap <Leader>a :call OpenTestAlternate()<CR>
+nnoremap <Leader>a :call OpenAlternate(expand('%'))<CR>
