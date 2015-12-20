@@ -114,8 +114,8 @@ nnoremap <Leader>b :Unite buffer<CR>
 " Search files
 nnoremap <Leader>f :Unite -start-insert git_cached<CR>
 
-nnoremap <Leader>w <Esc>:wa<CR>
-nnoremap <Leader>c <Esc>:bd!<CR>
+nnoremap <Leader>w :wa<CR>
+nnoremap <Leader><Esc> :bd!<CR>
 
 " Turn off the search highlighting on enter
 " still buggy in nvim, thus disabled
