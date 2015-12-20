@@ -69,6 +69,30 @@ function! DiffToggle()
   endif
 :endfunction
 
+function! OpenTestAlternate()
+  let new_file = AlternateForCurrentFile()
+  exec ':e ' . new_file
+endfunction
+
+function! OpenRspec()
+  let current_file = expand("%")
+  exec ':below new'
+  exec ':terminal rspec ' . current_file
+endfunction
+
+function! AlternateForCurrentFile()
+  let current_file = expand("%")
+  let new_file = current_file
+  if match(current_file, '^spec/') != -1
+    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
+    let new_file = substitute(new_file, '^spec/', 'app/', '')
+  else
+    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
+    let new_file = substitute(new_file, '^app/', 'spec/', '')
+  endif
+  return new_file
+endfunction
+
 " -------------------------------------------------------------------
 "  KEY MAPPINGS
 " -------------------------------------------------------------------
@@ -98,7 +122,10 @@ nnoremap <silent> <Leader>d :call DiffToggle()<CR>
 " Insert the current filename with full path
 inoremap \fn <C-R>=expand("%:p")<CR>
 
-nnoremap <Leader>r :terminal rspec =expand("%:p")<CR>
+nnoremap <Leader>r :call OpenRspec()<CR>
 
 " Search the selected text with Ag
 vnoremap // y :Ag <C-R>"<CR>
+
+" Switch between a Ruby class and its spec
+nnoremap <Leader>a :call OpenTestAlternate()<CR>
