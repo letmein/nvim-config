@@ -53,6 +53,7 @@ Plug 'git://github.com/nelstrom/vim-textobj-rubyblock.git'
 Plug 'https://github.com/Shougo/unite.vim'
 Plug 'https://github.com/yuku-t/unite-git'
 Plug 'https://github.com/benekastah/neomake'
+Plug 'https://github.com/keith/rspec.vim'
 
 call plug#end()
 
@@ -93,6 +94,8 @@ function! DiffToggle()
 
 " Insert the current filename with full path
 inoremap \fn <C-R>=expand("%:p")<CR>
+
+nnoremap <Leader>r :terminal rspec =expand("%:p")<CR>
 
 " Search the selected text with Ag
 vnoremap // y :Ag <C-R>"<CR>
