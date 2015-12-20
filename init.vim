@@ -58,6 +58,18 @@ Plug 'https://github.com/keith/rspec.vim'
 call plug#end()
 
 " -------------------------------------------------------------------
+"  FUNCTIONS
+" -------------------------------------------------------------------
+
+function! DiffToggle()
+  if &diff
+    windo diffoff
+  else
+    windo diffthis
+  endif
+:endfunction
+
+" -------------------------------------------------------------------
 "  KEY MAPPINGS
 " -------------------------------------------------------------------
 
@@ -82,15 +94,6 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Show diff between 2 splits
 nnoremap <silent> <Leader>d :call DiffToggle()<CR>
-
-" The ! overwrites any existing definition by this name.
-function! DiffToggle()
-  if &diff
-    windo diffoff
-  else
-    windo diffthis
-  endif
-:endfunction
 
 " Insert the current filename with full path
 inoremap \fn <C-R>=expand("%:p")<CR>
