@@ -69,28 +69,36 @@ function! DiffToggle()
   endif
 :endfunction
 
-function! OpenTestAlternate()
-  let new_file = AlternateForCurrentFile()
-  exec ':e ' . new_file
-endfunction
-
 function! OpenRspec()
   let current_file = expand("%")
   exec ':below new'
   exec ':terminal rspec ' . current_file
 endfunction
 
+function! OpenTestAlternate()
+  let new_file = AlternateForCurrentFile()
+  exec ':e ' . new_file
+endfunction
+
+function! AppToRspec(file_name)
+  let result = substitute(a:file_name, '\.rb$', '_spec.rb', '')
+  let result = substitute(result, '^app/', 'spec/', '')
+  return result
+endfunction
+
+function! RspecToApp(file_name)
+  let result = substitute(a:file_name, '_spec\.rb$', '.rb', '')
+  let result = substitute(result, '^spec/', 'app/', '')
+  return result
+endfunction
+
 function! AlternateForCurrentFile()
   let current_file = expand("%")
-  let new_file = current_file
   if match(current_file, '^spec/') != -1
-    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
-    let new_file = substitute(new_file, '^spec/', 'app/', '')
+    return RspecToApp(current_file)
   else
-    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
-    let new_file = substitute(new_file, '^app/', 'spec/', '')
+    return AppToRspec(current_file)
   endif
-  return new_file
 endfunction
 
 " -------------------------------------------------------------------
