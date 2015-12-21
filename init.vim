@@ -154,6 +154,7 @@ nnoremap <silent> <Leader>gs :Gstatus<CR>
 nnoremap <silent> <Leader>gc :Gcommit<CR>
 nnoremap <silent> <Leader>gw :Gwrite<CR>
 nnoremap <silent> <Leader>gr :Gread<CR>
+nnoremap <silent> <Leader>gb :Gblame<CR>
 
 " Insert the current filename with full path
 inoremap \fn <C-R>=expand("%:p")<CR>
