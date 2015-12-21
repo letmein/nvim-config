@@ -162,7 +162,14 @@ nnoremap <silent> <Leader>gl :Gitv<CR>
 " Insert the current filename with full path
 inoremap \fn <C-R>=expand("%:p")<CR>
 
-nnoremap <Leader>t :call RunTest(expand('%'))<CR>
+" Run test for the current file
+nnoremap <Leader>r :call RunTest(expand('%'))<CR>
+
+" Copy selection to the global buffer
+nnoremap <Leader>y "+y
+
+" Past from the global buffer
+nnoremap <Leader>p "+p
 
 " Search the selected text with Ag
 vnoremap // y :Ag <C-R>"<CR>
