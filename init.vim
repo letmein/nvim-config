@@ -55,6 +55,8 @@ Plug 'https://github.com/Shougo/unite.vim'
 Plug 'https://github.com/yuku-t/unite-git'
 Plug 'https://github.com/benekastah/neomake'
 Plug 'https://github.com/keith/rspec.vim'
+Plug 'https://github.com/gregsexton/gitv'
+Plug 'elzr/vim-json'
 
 call plug#end()
 
@@ -155,6 +157,7 @@ nnoremap <silent> <Leader>gc :Gcommit<CR>
 nnoremap <silent> <Leader>gw :Gwrite<CR>
 nnoremap <silent> <Leader>gr :Gread<CR>
 nnoremap <silent> <Leader>gb :Gblame<CR>
+nnoremap <silent> <Leader>gl :Gitv<CR>
 
 " Insert the current filename with full path
 inoremap \fn <C-R>=expand("%:p")<CR>
