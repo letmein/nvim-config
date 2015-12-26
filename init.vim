@@ -160,7 +160,7 @@ map <Leader>rl :call RunLastSpec()<CR>
 map <Leader>ra :call RunAllSpecs()<CR>
 
 " Copy selection to the global buffer
-nnoremap <Leader>y "+y
+vnoremap <Leader>y "+y
 
 " Past from the global buffer
 nnoremap <Leader>p "+p
@@ -170,4 +170,3 @@ vnoremap // y :Ag <C-R>"<CR>
 
 " Switch between a Ruby class and its spec
 nnoremap <Leader>a :call OpenAlternate(expand('%'))<CR>
-
