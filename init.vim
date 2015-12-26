@@ -34,6 +34,8 @@ autocmd! BufWritePost *.jade call MonitorJadeIncludes()
 highlight ExtraWhitespace guibg=#660000
 match ExtraWhitespace /\s\+$/
 
+let g:rspec_command = ":terminal rspec {spec}"
+
 " -------------------------------------------------------------------
 "  PLUGINS
 " -------------------------------------------------------------------
@@ -57,6 +59,11 @@ Plug 'https://github.com/benekastah/neomake'
 Plug 'https://github.com/keith/rspec.vim'
 Plug 'https://github.com/gregsexton/gitv'
 Plug 'elzr/vim-json'
+Plug 'honza/vim-snippets'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'thoughtbot/vim-rspec'
 
 call plug#end()
 
@@ -110,20 +117,6 @@ function! OpenAlternate(file_name)
   exec ':e ' . alt_file
 endfunction
 
-function! RunTest(file_name)
-  let file_name = a:file_name
-  if file_name =~ '\.rb$'
-    if file_name !~ '^spec/'
-      let file_name = AlternateForRuby(file_name)
-    endif
-    exec ':below new'
-    exec ':terminal rspec ' . file_name
-  elseif file_name =~ '\.coffee$'
-    exec ':below new'
-    exec ':terminal npm run test-unit'
-  endif
-endfunction
-
 " -------------------------------------------------------------------
 "  KEY MAPPINGS
 " -------------------------------------------------------------------
@@ -140,9 +133,7 @@ nnoremap <Leader>f :Unite -start-insert git_cached<CR>
 nnoremap <Leader>w :wa<CR>
 nnoremap <Leader><Esc> :bd!<CR>
 
-" Turn off the search highlighting on enter
-" still buggy in nvim, thus disabled
-" nmap <CR> :noh<CR><CR>
+nnoremap <silent> <CR> :noh<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -162,8 +153,11 @@ nnoremap <silent> <Leader>gl :Gitv<CR>
 " Insert the current filename with full path
 inoremap \fn <C-R>=expand("%:p")<CR>
 
-" Run test for the current file
-nnoremap <Leader>r :call RunTest(expand('%'))<CR>
+" RSpec.vim mappings
+map <Leader>rr :call RunCurrentSpecFile()<CR>
+map <Leader>rs :call RunNearestSpec()<CR>
+map <Leader>rl :call RunLastSpec()<CR>
+map <Leader>ra :call RunAllSpecs()<CR>
 
 " Copy selection to the global buffer
 nnoremap <Leader>y "+y
@@ -176,3 +170,4 @@ vnoremap // y :Ag <C-R>"<CR>
 
 " Switch between a Ruby class and its spec
 nnoremap <Leader>a :call OpenAlternate(expand('%'))<CR>
+
