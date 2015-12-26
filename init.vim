@@ -150,9 +150,6 @@ nnoremap <silent> <Leader>gr :Gread<CR>
 nnoremap <silent> <Leader>gb :Gblame<CR>
 nnoremap <silent> <Leader>gl :Gitv<CR>
 
-" Insert the current filename with full path
-inoremap \fn <C-R>=expand("%:p")<CR>
-
 " RSpec.vim mappings
 map <Leader>rr :call RunCurrentSpecFile()<CR>
 map <Leader>rs :call RunNearestSpec()<CR>
@@ -160,7 +157,9 @@ map <Leader>rl :call RunLastSpec()<CR>
 map <Leader>ra :call RunAllSpecs()<CR>
 
 " Copy selection to the global buffer
-vnoremap <Leader>y "+y
+vnoremap <Leader>ys "+y
+" Copy the current filename
+nnoremap <silent> <Leader>yf :let @+ = expand('%')<CR>
 
 " Past from the global buffer
 nnoremap <Leader>p "+p
