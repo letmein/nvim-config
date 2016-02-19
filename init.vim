@@ -21,20 +21,26 @@ set cursorline
 
 colorscheme softblue-custom
 
-autocmd VimEnter * AirlineTheme lucius
 autocmd BufNewFile,BufReadPost *.coffee,*.slim setlocal sw=2 tabstop=2 expandtab
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
-autocmd BufWinEnter *.rb,*.coffee,*.slim let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+autocmd BufWinEnter *.rb,*.coffee,*.slim,*.jade let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
 autocmd! BufWritePost * Neomake
 autocmd! BufWritePost *.jade call MonitorJadeIncludes()
 
 highlight ExtraWhitespace guibg=#660000
 match ExtraWhitespace /\s\+$/
 
-let g:rspec_command = ":terminal rspec {spec}"
+let g:jsx_ext_required = 0
+
+let g:rspec_command = ":execute 'split | terminal rspec {spec}'"
+
+let g:dbext_default_profile_PG_retro = 'type=PGSQL:user=postgres:dbname=retro_dev'
+let g:dbext_default_profile = 'PG_retro'
+
+let g:airline_theme='luna'
 
 " -------------------------------------------------------------------
 "  PLUGINS
@@ -50,7 +56,8 @@ Plug 'https://github.com/rking/ag.vim'
 Plug 'https://github.com/kchmck/vim-coffee-script'
 Plug 'https://github.com/digitaltoad/vim-jade'
 Plug 'https://github.com/slim-template/vim-slim'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'git://github.com/kana/vim-textobj-user.git'
 Plug 'git://github.com/nelstrom/vim-textobj-rubyblock.git'
 Plug 'https://github.com/Shougo/unite.vim'
@@ -64,6 +71,15 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'thoughtbot/vim-rspec'
+Plug 'elixir-lang/vim-elixir'
+Plug 'thinca/vim-ref'
+Plug 'awetzel/elixir.nvim', { 'do': './install.sh' }
+"Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'vim-scripts/dbext.vim'
+Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 
@@ -117,6 +133,35 @@ function! OpenAlternate(file_name)
   exec ':e ' . alt_file
 endfunction
 
+function! DoPrettyXML()
+  " save the filetype so we can restore it later
+  let l:origft = &ft
+  set ft=
+  " delete the xml header if it exists. This will
+  " permit us to surround the document with fake tags
+  " without creating invalid xml.
+  1s/<?xml .*?>//e
+  " insert fake tags around the entire document.
+  " This will permit us to pretty-format excerpts of
+  " XML that may contain multiple top-level elements.
+  0put ='<PrettyXML>'
+  $put ='</PrettyXML>'
+  silent %!xmllint --format -
+  " xmllint will insert an <?xml?> header. it's easy enough to delete
+  " if you don't want it.
+  " delete the fake tags
+  2d
+  $d
+  " restore the 'normal' indentation, which is one extra level
+  " too deep due to the extra tags we wrapped around the document.
+  silent %<
+  " back to home
+  1
+  " restore the filetype
+  exe "set ft=" . l:origft
+endfunction
+command! PrettyXML call DoPrettyXML()
+
 " -------------------------------------------------------------------
 "  KEY MAPPINGS
 " -------------------------------------------------------------------
@@ -125,13 +170,10 @@ endfunction
 nnoremap <silent> <S-Tab> :NERDTreeToggle<CR>
 
 " Open the buffer list
-nnoremap <Leader>b :Unite buffer<CR>
+nnoremap <Leader>fb :Unite -start-insert buffer<CR>
 
 " Search files
-nnoremap <Leader>f :Unite -start-insert git_cached<CR>
-
-nnoremap <Leader>w :wa<CR>
-nnoremap <Leader><Esc> :bd!<CR>
+nnoremap <Leader>ff :Unite -start-insert git_cached<CR>
 
 nnoremap <silent> <CR> :noh<CR>
 
@@ -148,13 +190,15 @@ nnoremap <silent> <Leader>gc :Gcommit<CR>
 nnoremap <silent> <Leader>gw :Gwrite<CR>
 nnoremap <silent> <Leader>gr :Gread<CR>
 nnoremap <silent> <Leader>gb :Gblame<CR>
-nnoremap <silent> <Leader>gl :Gitv<CR>
+nnoremap <silent> <Leader>gl :Gitv<CR>`
 
 " RSpec.vim mappings
-map <Leader>rr :call RunCurrentSpecFile()<CR>
-map <Leader>rs :call RunNearestSpec()<CR>
-map <Leader>rl :call RunLastSpec()<CR>
-map <Leader>ra :call RunAllSpecs()<CR>
+nnoremap <Leader>rr :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>rs :call RunNearestSpec()<CR>
+nnoremap <Leader>rl :call RunLastSpec()<CR>
+nnoremap <Leader>ra :call RunAllSpecs()<CR>
+
+nnoremap <Leader>w <C-W>
 
 " Copy selection to the global buffer
 vnoremap <Leader>ys "+y
@@ -166,6 +210,9 @@ nnoremap <Leader>p "+p
 
 " Search the selected text with Ag
 vnoremap // y :Ag <C-R>"<CR>
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
 
 " Switch between a Ruby class and its spec
 nnoremap <Leader>a :call OpenAlternate(expand('%'))<CR>
