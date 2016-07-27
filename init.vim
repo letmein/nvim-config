@@ -75,11 +75,12 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'thinca/vim-ref'
 Plug 'awetzel/elixir.nvim', { 'do': './install.sh' }
 "Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'vim-scripts/dbext.vim'
+"Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+"Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
+"Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+"Plug 'vim-scripts/dbext.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
 
 call plug#end()
 
