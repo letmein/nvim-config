@@ -18,6 +18,9 @@ set nowrap
 set ruler
 set noswapfile
 set cursorline
+set termguicolors
+
+language messages en_US.UTF-8
 
 colorscheme softblue-custom
 
@@ -41,6 +44,12 @@ let g:dbext_default_profile_PG_retro = 'type=PGSQL:user=postgres:dbname=retro_de
 let g:dbext_default_profile = 'PG_retro'
 
 let g:airline_theme='luna'
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = []
+let g:deoplete#disable_auto_complete = 1
 
 " -------------------------------------------------------------------
 "  PLUGINS
@@ -81,6 +90,9 @@ Plug 'awetzel/elixir.nvim', { 'do': './install.sh' }
 "Plug 'vim-scripts/dbext.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
+Plug 'leafgarland/typescript-vim', { 'for': 'ts' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fishbullet/deoplete-ruby'
 
 call plug#end()
 
@@ -105,22 +117,20 @@ function! MonitorJadeIncludes()
 endfunction
 
 function! AlternateForRuby(file_name)
-  if a:file_name =~ '^spec/'
+  if a:file_name =~ '_spec\.rb$'
     let result = substitute(a:file_name, '_spec\.rb$', '.rb', '')
-    return substitute(result, '^spec/', 'app/', '')
+    return substitute(result, '^.*spec/', 'app/', '')
   else
     let result = substitute(a:file_name, '\.rb$', '_spec.rb', '')
-    return substitute(result, '^app/', 'spec/', '')
+    return substitute(result, '^.*app/', 'spec/', '')
   endif
 endfunction
 
 function! AlternateForCoffee(file_name)
-  if a:file_name =~ '^ui/spec/unit/'
-    let result = substitute(a:file_name, '_spec\.coffee$', '.coffee', '')
-    return substitute(result, '^ui/spec/unit/', 'ui/assets/javascripts/', '')
+  if a:file_name =~ '_spec\.coffee'
+    return substitute(a:file_name, '_spec\.coffee$', '.coffee', '')
   else
-    let result = substitute(a:file_name, '\.coffee$', '_spec.coffee', '')
-    return substitute(result, '^ui/assets/javascripts/', 'ui/spec/unit/', '')
+    return substitute(a:file_name, '\.coffee$', '_spec.coffee', '')
   endif
 endfunction
 
@@ -217,3 +227,5 @@ nmap s <Plug>(easymotion-overwin-f2)
 
 " Switch between a Ruby class and its spec
 nnoremap <Leader>a :call OpenAlternate(expand('%'))<CR>
+
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()

@@ -1,6 +1,8 @@
 # #!/usr/bin/env ruby
 snippet #!
 	#!/usr/bin/env ruby
+snippet #fr
+	# frozen_string_literal: true
 # Rspec template
 snippet spec
 	require 'rails_helper'
@@ -122,9 +124,11 @@ snippet do
 	do |${1:variable}|
 		${2}
 	end
-snippet :
-	:${1:key} => ${2:"value"}${3}
 snippet let
 	let(:${1}) { ${2} }
+snippet letd
+	let(:${1}) do
+		${2}
+	end
 snippet expect
 	expect(${1}).to ${2}

@@ -26,6 +26,7 @@ hi Search       guibg=#787878   guifg=wheat
 hi SpecialKey   guifg=yellowgreen
 hi StatusLine   guibg=#466292   guifg=black     gui=none
 hi StatusLineNC guibg=#466292   guifg=grey22    gui=none
+hi SignColumn   guibg=#183068
 hi Title        guifg=#38d9ff
 hi Visual       guifg=lightblue guibg=#001146   gui=none
 hi WarningMsg   guifg=salmon
