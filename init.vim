@@ -228,4 +228,4 @@ nmap s <Plug>(easymotion-overwin-f2)
 " Switch between a Ruby class and its spec
 nnoremap <Leader>a :call OpenAlternate(expand('%'))<CR>
 
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+inoremap <silent><expr> <C-p> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
