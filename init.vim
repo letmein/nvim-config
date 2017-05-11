@@ -38,7 +38,7 @@ match ExtraWhitespace /\s\+$/
 
 let g:jsx_ext_required = 0
 
-let g:rspec_command = ":execute 'split | terminal rspec {spec}'"
+let g:rspec_command = ':call RunMySpecs("{spec}")'
 
 let g:dbext_default_profile_PG_retro = 'type=PGSQL:user=postgres:dbname=retro_dev'
 let g:dbext_default_profile = 'PG_retro'
@@ -99,6 +99,12 @@ call plug#end()
 " -------------------------------------------------------------------
 "  FUNCTIONS
 " -------------------------------------------------------------------
+
+function! RunMySpecs(specs)
+  execute 'split | terminal rspec ' . a:specs
+  " Prevent closing the terminal on any key press
+  execute feedkeys("\<c-\>\<c-n>")
+endfunction
 
 function! DiffToggle()
   if &diff
