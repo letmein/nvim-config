@@ -60,7 +60,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-easy-align'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'https://github.com/rking/ag.vim'
+Plug 'numkil/ag.nvim'
 Plug 'https://github.com/kchmck/vim-coffee-script'
 Plug 'https://github.com/digitaltoad/vim-jade'
 Plug 'https://github.com/slim-template/vim-slim'
