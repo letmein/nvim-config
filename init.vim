@@ -29,7 +29,7 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
-autocmd BufWinEnter *.rb,*.coffee,*.slim,*.jade let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+autocmd BufWinEnter *.rb,*.coffee,*.slim,*.jade,*.pug let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
 autocmd! BufWritePost * Neomake
 autocmd! BufWritePost *.jade call MonitorJadeIncludes()
 
