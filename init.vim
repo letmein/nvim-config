@@ -31,7 +31,6 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 autocmd BufWinEnter *.rb,*.coffee,*.slim,*.jade,*.pug let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
 autocmd! BufWritePost * Neomake
-autocmd! BufWritePost *.jade call MonitorJadeIncludes()
 
 highlight ExtraWhitespace guibg=#660000
 match ExtraWhitespace /\s\+$/
@@ -111,14 +110,6 @@ function! DiffToggle()
     windo diffoff
   else
     windo diffthis
-  endif
-endfunction
-
-function! MonitorJadeIncludes()
-  let current_file = expand('%:t')
-  let current_dir  = expand('%:p:h')
-  if current_file =~ '^_'
-    exec ':silent !find ' . current_dir . ' -name *.jade | xargs grep -l "include ./' . current_file . '" | xargs touch'
   endif
 endfunction
 
