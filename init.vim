@@ -54,7 +54,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-easy-align'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'numkil/ag.nvim'
+Plug 'mileszs/ack.vim'
 Plug 'https://github.com/kchmck/vim-coffee-script'
 Plug 'https://github.com/digitaltoad/vim-jade'
 Plug 'https://github.com/slim-template/vim-slim'
@@ -88,6 +88,21 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'fishbullet/deoplete-ruby'
 
 call plug#end()
+
+" -------------------------------------------------------------------
+"  Ack
+" -------------------------------------------------------------------
+
+" Search the selected text
+vnoremap // y :Ack! <C-R>"<CR>
+
+cnoreabbrev Ack Ack!
+
+nnoremap <Leader>l :Ack!<Space>
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " -------------------------------------------------------------------
 "  FUNCTIONS
@@ -209,9 +224,6 @@ nnoremap <silent> <Leader>yf :let @+ = expand('%')<CR>
 
 " Past from the global buffer
 nnoremap <Leader>p "+p
-
-" Search the selected text with Ag
-vnoremap // y :Ag <C-R>"<CR>
 
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
