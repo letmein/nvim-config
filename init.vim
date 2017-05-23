@@ -105,6 +105,20 @@ if executable('ag')
 endif
 
 " -------------------------------------------------------------------
+"  Remove current file
+" -------------------------------------------------------------------
+
+nnoremap <Leader>fd :call RemoveCurrentFile()<CR>
+
+function! RemoveCurrentFile()
+  let filename = expand('%')
+  if confirm('Remove "' . filename . '"?')
+    call delete(filename)
+    bdelete!
+  endif
+endfunction
+
+" -------------------------------------------------------------------
 "  FUNCTIONS
 " -------------------------------------------------------------------
 
