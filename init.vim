@@ -44,12 +44,6 @@ let g:dbext_default_profile = 'PG_retro'
 
 let g:airline_theme='luna'
 
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources = {}
-let g:deoplete#sources._ = []
-let g:deoplete#disable_auto_complete = 1
-
 " -------------------------------------------------------------------
 "  PLUGINS
 " -------------------------------------------------------------------
@@ -224,5 +218,3 @@ nmap s <Plug>(easymotion-overwin-f2)
 
 " Switch between a Ruby class and its spec
 nnoremap <Leader>a :call OpenAlternate(expand('%'))<CR>
-
-inoremap <silent><expr> <C-p> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
