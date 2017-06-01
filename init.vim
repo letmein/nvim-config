@@ -105,16 +105,27 @@ if executable('ag')
 endif
 
 " -------------------------------------------------------------------
-"  Remove current file
+"  File management
 " -------------------------------------------------------------------
 
 nnoremap <Leader>fd :call RemoveCurrentFile()<CR>
+nnoremap <leader>fr :call RenameCurrentFile()<cr>
 
 function! RemoveCurrentFile()
   let filename = expand('%')
   if confirm('Remove "' . filename . '"?')
     call delete(filename)
     bdelete!
+  endif
+endfunction
+
+function! RenameCurrentFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+      exec ':saveas ' . new_name
+      exec ':silent !rm ' . old_name
+      redraw!
   endif
 endfunction
 
@@ -154,9 +165,44 @@ function! AlternateForCoffee(file_name)
   endif
 endfunction
 
+function! AlternateForMailer(file_name)
+  let template_dir = substitute(a:file_name, 'app\/mailers\/', 'app/views/', '')
+  let template_dir = substitute(template_dir, '_mailer.rb$', '_mailer/', '')
+
+  let opts = "&Spec"
+  let templates = split(globpath(template_dir, '*'), '\n')
+
+  for filename in templates
+    let opts = opts . "\n&" . split(filename, '/')[-1]
+  endfor
+
+  let choice = confirm("Open alternative", opts, 1)
+  if choice == 1
+    return AlternateForRuby(a:file_name)
+  elseif choice == 2
+    return templates[choice - 2]
+  endif
+endfunction
+
+function! AlternateForMailerView(file_name)
+  let mailer_name = substitute(a:file_name, 'app\/views\/', 'app/mailers/', '')
+  let mailer_name = substitute(mailer_name, '_mailer\/.*$', '_mailer.rb', '')
+
+  let choice = confirm("Open alternative", "&Mailer\n&Spec", 1)
+  if choice == 1
+    return mailer_name
+  elseif choice == 2
+    return AlternateForRuby(mailer_name)
+  endif
+endfunction
+
 function! OpenAlternate(file_name)
   let alt_file = a:file_name
-  if alt_file =~ '\.rb$'
+  if alt_file =~ 'app\/mailers\/.*_mailer.rb$'
+    let alt_file = AlternateForMailer(alt_file)
+  elseif alt_file =~ 'app\/views\/.*_mailer\/'
+    let alt_file = AlternateForMailerView(alt_file)
+  elseif alt_file =~ '\.rb$'
     let alt_file = AlternateForRuby(alt_file)
   elseif alt_file =~ '\.coffee$'
     let alt_file = AlternateForCoffee(alt_file)
@@ -243,4 +289,4 @@ nnoremap <Leader>p "+p
 nmap s <Plug>(easymotion-overwin-f2)
 
 " Switch between a Ruby class and its spec
-nnoremap <Leader>a :call OpenAlternate(expand('%'))<CR>
+nnoremap <silent> <Leader>a :call OpenAlternate(expand('%'))<CR>
