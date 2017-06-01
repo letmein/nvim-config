@@ -84,8 +84,6 @@ Plug 'awetzel/elixir.nvim', { 'do': './install.sh' }
 Plug 'easymotion/vim-easymotion'
 Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
 Plug 'leafgarland/typescript-vim', { 'for': 'ts' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'fishbullet/deoplete-ruby'
 
 call plug#end()
 
