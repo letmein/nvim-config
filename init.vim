@@ -19,6 +19,7 @@ set ruler
 set noswapfile
 set cursorline
 set termguicolors
+set inccommand=nosplit
 
 language messages en_US.UTF-8
 
@@ -29,7 +30,8 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
-autocmd BufWinEnter *.rb,*.coffee,*.slim,*.jade,*.pug let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+" Highlight long strings
+" autocmd BufWinEnter *.rb,*.coffee,*.slim,*.jade,*.pug let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
 autocmd! BufWritePost * Neomake
 
 highlight ExtraWhitespace guibg=#660000
@@ -84,6 +86,7 @@ Plug 'awetzel/elixir.nvim', { 'do': './install.sh' }
 Plug 'easymotion/vim-easymotion'
 Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
 Plug 'leafgarland/typescript-vim', { 'for': 'ts' }
+Plug 'gregsexton/gitv', {'on': ['Gitv']}
 
 call plug#end()
 
@@ -92,7 +95,7 @@ call plug#end()
 " -------------------------------------------------------------------
 
 " Search the selected text
-vnoremap // y :Ack! <C-R>"<CR>
+vnoremap // y :Ack! "<C-R>""<CR>
 
 cnoreabbrev Ack Ack!
 
@@ -132,7 +135,7 @@ endfunction
 " -------------------------------------------------------------------
 
 function! RunMySpecs(specs)
-  execute 'split | terminal rspec ' . a:specs
+  execute 'split | terminal bundle exec rspec ' . a:specs
   " Prevent closing the terminal on any key press
   execute feedkeys("\<c-\>\<c-n>")
 endfunction
@@ -236,6 +239,27 @@ function! DoPrettyXML()
   exe "set ft=" . l:origft
 endfunction
 command! PrettyXML call DoPrettyXML()
+
+" -------------------------------------------------------------------
+"  Airline
+" -------------------------------------------------------------------
+
+" MODE
+let g:airline_section_a = ''
+
+" Git
+let g:airline_section_b = ''
+
+" Filename
+let g:airline_section_c = airline#section#create(['%m ', '%f'])
+
+" Filetype (default)
+" let g:airline_section_x = ''
+
+" Encoding
+let g:airline_section_y = ''
+
+let g:airline_section_z = airline#section#create(['%l/%L:%c'])
 
 " -------------------------------------------------------------------
 "  KEY MAPPINGS
