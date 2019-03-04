@@ -5,28 +5,28 @@ snippet #fr
 	# frozen_string_literal: true
 # Rspec template
 snippet spec
-	require 'rails_helper'
+	require "rails_helper"
 
 	RSpec.describe ${1} do
-		describe '${2}' do
+		describe "${2}" do
 			${3}
 		end
 	end
 # Rspec "describe" block
 snippet des
-	describe '${1}' do
+	describe "${1}" do
 		${2}
 	end
 # Rspec "it" block
 snippet it
-	it '${1}' do
+	it "${1}" do
 		${2}
 	end
 #  expect().to 
 snippet exp
 	expect(${1}).to ${2}
 snippet con
-	context '${1}' do
+	context "${1}" do
 		${2}
 	end
 # Rspec "before" block
@@ -134,3 +134,14 @@ snippet expect
 	expect(${1}).to ${2}
 snippet pry
 	binding.pry
+
+snippet jobj
+	{
+		type: :object,
+		properties: {
+			${1}
+		},
+		required: []
+	}
+snippet jty
+	{ type: ${1} }

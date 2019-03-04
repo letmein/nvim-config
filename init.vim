@@ -24,15 +24,14 @@ set inccommand=nosplit
 language messages en_US.UTF-8
 
 colorscheme softblue-custom
+" colorscheme OceanicNext
 
 autocmd BufNewFile,BufReadPost *.coffee,*.slim,*.pug setlocal sw=2 tabstop=2 expandtab
+autocmd BufNewFile,BufReadPost *.elm setlocal sw=4 tabstop=4 expandtab
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
-" Highlight long strings
-" autocmd BufWinEnter *.rb,*.coffee,*.slim,*.jade,*.pug let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
-autocmd! BufWritePost * Neomake
 
 highlight ExtraWhitespace guibg=#660000
 match ExtraWhitespace /\s\+$/
@@ -46,6 +45,44 @@ let g:dbext_default_profile = 'PG_retro'
 
 let g:airline_theme='luna'
 
+let g:indentLine_char = '▏'
+let g:indentLine_color_gui = '#303b4c'
+
+let g:elm_setup_keybindings = 0
+let g:elm_format_autosave = 1
+let g:elm_make_show_warnings = 1
+
+let g:gitgutter_map_keys = 0
+
+let g:mix_format_on_save = 1
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --colors "match:fg:255,0,0" --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
 " -------------------------------------------------------------------
 "  PLUGINS
 " -------------------------------------------------------------------
@@ -55,40 +92,54 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-easy-align'
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
 Plug 'mileszs/ack.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/kchmck/vim-coffee-script'
-Plug 'https://github.com/digitaltoad/vim-jade'
 Plug 'https://github.com/slim-template/vim-slim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'git://github.com/kana/vim-textobj-user.git'
 Plug 'git://github.com/nelstrom/vim-textobj-rubyblock.git'
-Plug 'https://github.com/Shougo/unite.vim'
-Plug 'https://github.com/yuku-t/unite-git'
-Plug 'https://github.com/benekastah/neomake'
+" Plug 'neomake/neomake'
 Plug 'https://github.com/keith/rspec.vim'
 Plug 'https://github.com/gregsexton/gitv'
-Plug 'elzr/vim-json'
 Plug 'honza/vim-snippets'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'thoughtbot/vim-rspec'
+Plug 'easymotion/vim-easymotion'
+Plug 'gregsexton/gitv', {'on': ['Gitv']}
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'w0rp/ale'
+" Plug 'Zaptic/elm-vim'
+Plug '~/src/elm-vim'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rbenv'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rhubarb'
+" Plug 'ludovicchabant/vim-gutentags'
+Plug 'posva/vim-vue'
+Plug 'majutsushi/tagbar'
+
+" Elixir
 Plug 'elixir-lang/vim-elixir'
 Plug 'thinca/vim-ref'
+Plug 'mhinz/vim-mix-format'
 Plug 'awetzel/elixir.nvim', { 'do': './install.sh' }
-"Plug 'othree/yajs.vim', { 'for': 'javascript' }
-"Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-"Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
-"Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-"Plug 'vim-scripts/dbext.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
-Plug 'leafgarland/typescript-vim', { 'for': 'ts' }
-Plug 'gregsexton/gitv', {'on': ['Gitv']}
 
 call plug#end()
+
+let g:jsx_ext_required = 1
+
+let g:gitgutter_map_keys = 0
+
+
+" call neomake#configure#automake('nrwi', 500)
+
 
 " -------------------------------------------------------------------
 "  Ack
@@ -108,9 +159,6 @@ endif
 " -------------------------------------------------------------------
 "  File management
 " -------------------------------------------------------------------
-
-nnoremap <Leader>fd :call RemoveCurrentFile()<CR>
-nnoremap <leader>fr :call RenameCurrentFile()<cr>
 
 function! RemoveCurrentFile()
   let filename = expand('%')
@@ -197,20 +245,6 @@ function! AlternateForMailerView(file_name)
   endif
 endfunction
 
-function! OpenAlternate(file_name)
-  let alt_file = a:file_name
-  if alt_file =~ 'app\/mailers\/.*_mailer.rb$'
-    let alt_file = AlternateForMailer(alt_file)
-  elseif alt_file =~ 'app\/views\/.*_mailer\/'
-    let alt_file = AlternateForMailerView(alt_file)
-  elseif alt_file =~ '\.rb$'
-    let alt_file = AlternateForRuby(alt_file)
-  elseif alt_file =~ '\.coffee$'
-    let alt_file = AlternateForCoffee(alt_file)
-  endif
-  exec ':e ' . alt_file
-endfunction
-
 function! DoPrettyXML()
   " save the filetype so we can restore it later
   let l:origft = &ft
@@ -240,6 +274,7 @@ function! DoPrettyXML()
 endfunction
 command! PrettyXML call DoPrettyXML()
 
+
 " -------------------------------------------------------------------
 "  Airline
 " -------------------------------------------------------------------
@@ -248,7 +283,7 @@ command! PrettyXML call DoPrettyXML()
 let g:airline_section_a = ''
 
 " Git
-let g:airline_section_b = ''
+" let g:airline_section_b = ''
 
 " Filename
 let g:airline_section_c = airline#section#create(['%m ', '%f'])
@@ -268,11 +303,6 @@ let g:airline_section_z = airline#section#create(['%l/%L:%c'])
 " Toggle NerdTree
 nnoremap <silent> <S-Tab> :NERDTreeToggle<CR>
 
-" Open the buffer list
-nnoremap <Leader>fb :Unite -start-insert buffer<CR>
-
-" Search files
-nnoremap <Leader>ff :Unite -start-insert git_cached<CR>
 
 nnoremap <silent> <CR> :noh<CR>
 
@@ -282,20 +312,90 @@ vmap <Enter> <Plug>(EasyAlign)
 " Show diff between 2 splits
 nnoremap <silent> <Leader>ds :call DiffToggle()<CR>
 
-" Fugitive git mappings
-nnoremap <silent> <Leader>gd :Gdiff<CR>
-nnoremap <silent> <Leader>gs :Gstatus<CR>
-nnoremap <silent> <Leader>gc :Gcommit<CR>
-nnoremap <silent> <Leader>gw :Gwrite<CR>
-nnoremap <silent> <Leader>gr :Gread<CR>
-nnoremap <silent> <Leader>gb :Gblame<CR>
-nnoremap <silent> <Leader>gl :Gitv<CR>`
+function! SimpleMenu(title, options)
+  let l:choice_map = {}
+
+  echo a:title
+
+  for choice in a:options
+    let l:key = choice[0]
+    let l:choice_map[l:key] = choice[2]
+
+    echohl Boolean
+    echon ' [' . l:key . '] '
+    echohl None
+    echon choice[1] . ' '
+  endfor
+
+  let l:response = nr2char(getchar())
+
+  redraw!
+
+  if has_key(l:choice_map, l:response)
+    execute l:choice_map[l:response]
+  endif
+endfunction
+
+
+let g:fuzzy_git_commands = {
+  \ 'status': ':Gstatus',
+  \ 'browse': ':Gbrowse',
+  \ 'add': ':Gwrite',
+  \ 'blame': ':Gblame',
+  \ 'commit': ':Gcommit',
+  \ 'diff': ':Gdiff',
+  \ 'ls': ':GFiles',
+  \ 'checkout': ':Gread',
+  \ 'branch': ':Gbranch',
+  \ }
+
+function! s:ExecGitCommand(cmd)
+  execute g:fuzzy_git_commands[a:cmd]
+endfunction
+
+function! s:ChangeGitBranch(branch)
+  execute '!git checkout ' . a:branch
+endfunction
+
+command! Gbranch call fzf#run({'source': 'git branch', 'sink': function('<sid>ChangeGitBranch'),  'down': '10'})
+
+nnoremap <silent> <Leader>g :call fzf#run({'source': sort(keys(g:fuzzy_git_commands)), 'sink': function('<sid>ExecGitCommand'), 'down': '10'})<CR>
 
 " RSpec.vim mappings
-nnoremap <Leader>rr :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>rs :call RunNearestSpec()<CR>
-nnoremap <Leader>rl :call RunLastSpec()<CR>
-nnoremap <Leader>ra :call RunAllSpecs()<CR>
+nnoremap <silent> <Leader>r :call SimpleMenu('RSpec:', [
+    \  ['r', 'current file', ':call RunCurrentSpecFile()'],
+    \  ['s', 'nearest example', ':call RunNearestSpec()'],
+    \  ['l', 'last spec', ':call RunLastSpec()'],
+    \  ['a', 'all specs', ':call RunAllSpecs()']
+    \])<CR>
+
+nnoremap <silent> <Leader>e :call SimpleMenu('AcceptanceTests:', [
+    \  ['r', 'current file', ':split \| terminal COV=NO rspec %'],
+    \  ['f', 'focused scenarios', ':split \| terminal COV=NO rspec --tag focus %'],
+    \  ['n', 'no headless focused scenarios', ':split \| terminal COV=NO NO_HEADLESS=1 rspec --tag focus %']
+    \])<CR>
+
+" Configs
+nnoremap <silent> <Leader>c :call SimpleMenu('Configs:', [
+    \  ['v', 'nvim', ':e ~/.config/nvim/init.vim'],
+    \  ['z', 'zsh', ':e ~/.zshrc']
+    \])<CR>
+
+nnoremap <silent> <Leader>f :call SimpleMenu('Files:', [
+    \  ['s', 'find by contents', ':Rg'],
+    \  ['f', 'find by filename', ':FZF'],
+    \  ['b', 'buffers', ':Buffers'],
+    \  ['d', 'remove current file', ':call RemoveCurrentFile()'],
+    \  ['r', 'rename current file', ':call RenameCurrentFile()']
+    \])<CR>
+
+nnoremap <silent> <Leader>a :call SimpleMenu('ALE:', [
+    \  ['d', 'Go to definition', ':ALEGoToDefinition'],
+    \  ['n', 'Next', ':ALENext'],
+    \  ['p', 'Previous', ':ALEPrevious']
+    \])<CR>
+
+nnoremap <silent> <Leader>t :TagbarToggle<CR>
 
 nnoremap <Leader>w <C-W>
 
@@ -310,5 +410,5 @@ nnoremap <Leader>p "+p
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
 
-" Switch between a Ruby class and its spec
-nnoremap <silent> <Leader>a :call OpenAlternate(expand('%'))<CR>
+nnoremap <silent> <Leader>m :Marks<CR>
+

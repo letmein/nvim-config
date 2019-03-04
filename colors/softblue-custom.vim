@@ -13,7 +13,7 @@ let g:colors_name="softblue-custom"
 hi Normal       guibg=#183058   guifg=#b0b0e0
 
 hi Cursor       guibg=#b3b2df   guifg=grey30    gui=bold
-hi VertSplit    guibg=#466292   guifg=grey50    gui=none
+hi VertSplit    guibg=#183058   guifg=grey50    gui=none
 hi Folded       guibg=#0d2349   guifg=lightblue
 hi FoldColumn   guibg=#0d2349   guifg=lightblue
 hi IncSearch    guifg=slategrey guibg=khaki
