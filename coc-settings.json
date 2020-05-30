@@ -1,0 +1,27 @@
+{
+  "codeLens.enable": true,
+  "suggest.enablePreview": true,
+  "solargraph.useBundler": false,
+  "solargraph.definitions": true,
+  "solargraph.hover": true,
+  "solargraph.completion": true,
+  "tabnine.shortcut": "TN",
+  "tabnine.triggers": [],
+  "tabnine.priority": 100,
+  "tabnine.binary_path": "",
+  "tabnine.disable_filetypes": ["png", "jpg", "gif"],
+  "tabnine.disable_file_regex": [],
+  "tabnine.disable_line_regex": [],
+  "languageserver": {
+    "elmLS": {
+      "command": "elm-language-server",
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "elmAnalyseTrigger": "change"
+      }
+    }
+  },
+  "coc.preferences.formatOnSaveFiletypes": ["elm"],
+  "snippets.convertToSnippetsAction": true
+}
