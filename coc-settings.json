@@ -5,13 +5,8 @@
   "solargraph.definitions": true,
   "solargraph.hover": true,
   "solargraph.completion": true,
-  "tabnine.shortcut": "TN",
-  "tabnine.triggers": [],
-  "tabnine.priority": 100,
-  "tabnine.binary_path": "",
-  "tabnine.disable_filetypes": ["png", "jpg", "gif"],
-  "tabnine.disable_file_regex": [],
-  "tabnine.disable_line_regex": [],
+  "solargraph.diagnostics": true,
+  "svelte.plugin.typescript.enable": true,
   "languageserver": {
     "elmLS": {
       "command": "elm-language-server",
@@ -23,5 +18,9 @@
     }
   },
   "coc.preferences.formatOnSaveFiletypes": ["elm"],
-  "snippets.convertToSnippetsAction": true
+  "suggest.noselect": false,
+  "snippets.priority": 200,
+  "diagnostic.warningSign": "❗️",
+  "diagnostic.errorSign": "❌",
+  "diagnostic.infoSign": "💩"
 }
