@@ -1,11 +1,13 @@
 {
   "codeLens.enable": true,
   "suggest.enablePreview": true,
+  "solargraph.checkGemVersion": false,
   "solargraph.useBundler": false,
   "solargraph.definitions": true,
   "solargraph.hover": true,
   "solargraph.completion": true,
   "solargraph.diagnostics": true,
+  "solargraph.logLevel": "debug",
   "svelte.plugin.typescript.enable": true,
   "languageserver": {
     "elmLS": {
@@ -19,7 +21,9 @@
   },
   "coc.preferences.formatOnSaveFiletypes": ["elm"],
   "suggest.noselect": false,
+  "signature.target": "float",
   "snippets.priority": 200,
+  "diagnostic.refreshOnInsertMode": true,
   "diagnostic.warningSign": "❗️",
   "diagnostic.errorSign": "❌",
   "diagnostic.infoSign": "💩"
