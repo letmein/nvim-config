@@ -69,10 +69,95 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["any-jump.vim"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/any-jump.vim",
+    url = "https://github.com/pechorin/any-jump.vim"
+  },
+  ["cmp-buffer"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/cmp-buffer",
+    url = "https://github.com/hrsh7th/cmp-buffer"
+  },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/cmp-path",
+    url = "https://github.com/hrsh7th/cmp-path"
+  },
+  ["cmp-tabnine"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/cmp-tabnine",
+    url = "https://github.com/tzachar/cmp-tabnine"
+  },
+  ["cmp-vsnip"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
+    url = "https://github.com/hrsh7th/cmp-vsnip"
+  },
+  ["git-messenger.vim"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/git-messenger.vim",
+    url = "https://github.com/rhysd/git-messenger.vim"
+  },
+  indentLine = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/indentLine",
+    url = "https://github.com/Yggdroot/indentLine"
+  },
+  ["lsp-status.nvim"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/lsp-status.nvim",
+    url = "https://github.com/nvim-lua/lsp-status.nvim"
+  },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  nerdtree = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/nerdtree",
+    url = "https://github.com/scrooloose/nerdtree"
+  },
+  ["nvim-cmp"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+    url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-lsp-installer"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
+    url = "https://github.com/williamboman/nvim-lsp-installer"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-endwise"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/nvim-treesitter-endwise",
+    url = "https://github.com/RRethy/nvim-treesitter-endwise"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -84,6 +169,11 @@ _G.packer_plugins = {
     path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["rspec.vim"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/rspec.vim",
+    url = "https://github.com/keith/rspec.vim"
+  },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
     path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
@@ -93,6 +183,71 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  tlib_vim = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/tlib_vim",
+    url = "https://github.com/tomtom/tlib_vim"
+  },
+  ["vim-addon-mw-utils"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-addon-mw-utils",
+    url = "https://github.com/MarcWeber/vim-addon-mw-utils"
+  },
+  ["vim-css-color"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-css-color",
+    url = "https://github.com/ap/vim-css-color"
+  },
+  ["vim-easy-align"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-easy-align",
+    url = "https://github.com/junegunn/vim-easy-align"
+  },
+  ["vim-easymotion"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-easymotion",
+    url = "https://github.com/easymotion/vim-easymotion"
+  },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-javascript"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-javascript",
+    url = "https://github.com/pangloss/vim-javascript"
+  },
+  ["vim-projectionist"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-projectionist",
+    url = "https://github.com/tpope/vim-projectionist"
+  },
+  ["vim-rhubarb"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-rhubarb",
+    url = "https://github.com/tpope/vim-rhubarb"
+  },
+  ["vim-test"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-test",
+    url = "https://github.com/janko/vim-test"
+  },
+  ["vim-textobj-rubyblock.git"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-textobj-rubyblock.git",
+    url = "https://github.com/nelstrom/vim-textobj-rubyblock"
+  },
+  ["vim-textobj-user.git"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-textobj-user.git",
+    url = "https://github.com/kana/vim-textobj-user"
+  },
+  ["vim-vsnip"] = {
+    loaded = true,
+    path = "/Users/yuriy/.local/share/nvim/site/pack/packer/start/vim-vsnip",
+    url = "https://github.com/hrsh7th/vim-vsnip"
   }
 }
 

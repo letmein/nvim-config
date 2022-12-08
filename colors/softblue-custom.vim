@@ -44,6 +44,7 @@ hi WarningMsg   guifg=salmon
 hi ErrorMsg     guifg=white     guibg=#b2377a
 hi Function     guifg=CornflowerBlue
 hi rubySymbol   guifg=plum
+hi Folded       guibg=#183058
 
 hi Comment      guifg=SlateGray4
 hi Constant     guifg=orchid

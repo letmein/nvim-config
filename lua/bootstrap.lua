@@ -4,6 +4,9 @@ require('plugins.telescope')
 require('plugins.cmp')
 require('plugins.tabnine')
 require('plugins.treesitter')
+require('plugins.nvim-tree')
+
+require('lualine').setup()
 
 vim.o.tabstop = 2
 vim.o.expandtab = true
@@ -21,6 +24,9 @@ vim.o.background = 'dark'
 vim.o.inccommand = 'nosplit'
 vim.o.tags = '.tags'
 vim.o.hidden = true
+vim.o.conceallevel = 0
 
 vim.g.indentLine_char = '▏'
 vim.g.indentLine_color_gui = '#303b4c'
+vim.g.vsnip_snippet_dir = '~/src/'
+

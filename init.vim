@@ -3,8 +3,6 @@ if exists('g:vscode')
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'asvetliakov/vim-easymotion'
-Plug 'https://github.com/kana/vim-textobj-user.git'
-Plug 'https://github.com/nelstrom/vim-textobj-rubyblock.git'
 
 call plug#end()
 
@@ -33,6 +31,10 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 autocmd FileType erb set omnifunc=htmlcomplete#CompleteTags
 
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
+" autocmd BufReadPost,FileReadPost * normal zR
+
 " Do not close :term buffer after process exit.
 " https://vi.stackexchange.com/questions/17816/solved-ish-neovim-dont-close-terminal-buffer-after-process-exit
 au TermOpen  * setlocal nonumber | startinsert
@@ -53,15 +55,6 @@ nmap s <Plug>(easymotion-s2)
 
 map <Space> <Leader>
 
-nnoremap <silent> <Leader>t :call
-      \ SimpleMenu('Test:', [
-      \   ['f', 'current file', ':TestFile'],
-      \   ['s', 'nearest example', ':TestNearest'],
-      \   ['l', 'last spec', ':TestLast'],
-      \   ['a', 'all specs', ':TestSuite'],
-      \   ['v', 'visit last', ':TestVisit']
-      \ ])<CR>
-
 nnoremap <silent> <Leader>g :call
       \ SimpleMenu('Git:', [
       \   ['b', 'branches', ':Telescope git_branches'],
@@ -72,21 +65,7 @@ nnoremap <silent> <Leader>g :call
       \   ['s', 'status', ':Telescope git_status'],
       \ ])<CR>
 
-nnoremap <silent> <Leader>f :call
-      \ SimpleMenu('Files:', [
-      \   ['f', 'by name', ':Telescope find_files'],
-      \   ['b', 'buffers', ':Telescope buffers'],
-      \   ['h', 'history', ':Telescope oldfiles'],
-      \   ['q', 'quick list', ':call OpenQuickConfigs()'],
-      \   ['w', 'find word', ':Telescope grep_string'],
-      \   ['g', 'live grep', ':Telescope live_grep'],
-      \ ])<CR>
-
 tnoremap <Esc> <C-\><C-n>:q!<CR>
-
-" Toggle NerdTree
-nnoremap <silent> <S-Tab> :NERDTreeToggle<CR>
-nnoremap <silent> <Leader><Tab> :NERDTreeFind<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
