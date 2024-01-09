@@ -2,11 +2,15 @@ require('plugins')
 require('plugins.lspc')
 require('plugins.telescope')
 require('plugins.cmp')
-require('plugins.tabnine')
 require('plugins.treesitter')
 require('plugins.nvim-tree')
 
 require('lualine').setup()
+require('elixir').setup()
+
+if vim.g.neovide then
+  require('neovide')
+end
 
 vim.o.tabstop = 2
 vim.o.expandtab = true
@@ -29,4 +33,3 @@ vim.o.conceallevel = 0
 vim.g.indentLine_char = '▏'
 vim.g.indentLine_color_gui = '#303b4c'
 vim.g.vsnip_snippet_dir = '~/src/'
-

@@ -1,11 +1,5 @@
 if exists('g:vscode')
 
-call plug#begin('~/.config/nvim/plugged')
-
-Plug 'asvetliakov/vim-easymotion'
-
-call plug#end()
-
 else
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -25,6 +19,7 @@ colorscheme softblue-custom
 
 autocmd BufNewFile,BufReadPost *.elm setlocal sw=4 tabstop=4 expandtab
 autocmd BufWinEnter *.json setlocal conceallevel=0
+autocmd BufWinEnter *.rb setlocal syntax=ruby
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/

@@ -32,4 +32,14 @@ nvim_lsp.solargraph.setup {
   -- cmd = {'solargraph-start'},
 }
 
-vim.lsp.set_log_level("debug")
+nvim_lsp.eslint.setup({
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
+
+-- vim.lsp.set_log_level("debug")
+

@@ -26,6 +26,13 @@ return require('packer').startup(function()
   }
 
   use {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require("telescope").load_extension "frecency"
+    end,
+  }
+
+  use {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
@@ -38,7 +45,9 @@ return require('packer').startup(function()
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
-  use { 'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp' }
+
+  use { "elixir-tools/elixir-tools.nvim", tag = "stable", requires = { "nvim-lua/plenary.nvim" }}
+
 
   use 'pechorin/any-jump.vim'
   use 'rhysd/git-messenger.vim'
@@ -56,6 +65,8 @@ return require('packer').startup(function()
   use 'tpope/vim-projectionist'
   use 'tpope/vim-rhubarb'
   use 'nvim-lua/lsp-status.nvim'
+  use 'rottencandy/vimkubectl'
+  use 'lmintmate/blue-mood-vim'
 
   use {
     'kyazdani42/nvim-tree.lua',
