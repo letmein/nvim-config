@@ -32,12 +32,6 @@ return require('packer').startup(function()
     end,
   }
 
-  use {
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-    'neovim/nvim-lspconfig',
-  }
-
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
@@ -46,11 +40,22 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
 
-  use { "elixir-tools/elixir-tools.nvim", tag = "stable", requires = { "nvim-lua/plenary.nvim" }}
-
-
   use 'pechorin/any-jump.vim'
   use 'rhysd/git-messenger.vim'
+
+  use 'github/copilot.vim'
+
+--[[
+  use { 
+    'Exafunction/codeium.vim',
+    config = function () 
+      vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
+      vim.keymap.set('i', '<C-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+      vim.keymap.set('i', '<C-backslash>', function() return vim.fn['codeium#Complete']() end, { expr = true, silent = true })
+      vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+    end
+  }
+]]--
 
   use 'ap/vim-css-color'
   use 'tpope/vim-fugitive'
@@ -64,7 +69,6 @@ return require('packer').startup(function()
   use 'pangloss/vim-javascript'
   use 'tpope/vim-projectionist'
   use 'tpope/vim-rhubarb'
-  use 'nvim-lua/lsp-status.nvim'
   use 'rottencandy/vimkubectl'
   use 'lmintmate/blue-mood-vim'
 

@@ -4,6 +4,7 @@ vim.g.neovide_input_use_logo = 1 -- enable use of the logo (cmd) key
 vim.g.neovide_cursor_vfx_mode = "" -- https://neovide.dev/configuration.html#cursor-settings
 vim.g.neovide_cursor_animation_length = 0.05
 vim.g.neovide_confirm_quit = true
+vim.opt.shell = "fish"
 vim.opt.guifont = "JetBrainsMono Nerd Font:h15"
 -- vim.opt.guifont = "Arian AMU Mono:h15"
 -- vim.opt.guifont = "DejaVu Sans Mono:h15"

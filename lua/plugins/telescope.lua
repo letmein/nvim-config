@@ -33,8 +33,8 @@ telescope.setup {
   },
   defaults = {
     file_ignore_patterns = {
---      "./vendor/cache/",
---      "./app/assets/images/",
+      "vendor/cache/*",
+      "app/assets/images/",
     },
     mappings = {
       i = {

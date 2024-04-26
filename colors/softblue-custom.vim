@@ -28,10 +28,12 @@ let g:terminal_color_13 = '#ad7fa8'
 let g:terminal_color_14 = '#00f5e9'
 let g:terminal_color_15 = '#eeeeec'
 
-hi Normal       guibg=#183058   guifg=gray85
+hi Type guifg=#886fff gui=bold
+hi link @module Type
 
-hi ALEWarningSign guifg=#183058
-hi ALEErrorSign guifg=#183058
+hi @constant.elixir guifg=#00ac55
+
+hi Normal       guibg=#183058   guifg=gray85
 
 hi Search       guibg=#787878   guifg=wheat
 hi SpecialKey   guifg=yellowgreen
@@ -51,11 +53,12 @@ hi Constant     guifg=orchid
 hi Identifier   guifg=#00ac55
 hi Statement    guifg=SkyBlue2
 hi PreProc      guifg=#20a0d0
-hi Type         guifg=LightSlateBlue gui=bold
-hi Special      guifg=#b6a040"wheat4"#7c9cf5"a2b9e0
+
+hi Special      guifg=#af9a3e 
 hi Ignore       guifg=grey40
 hi Error        guifg=white     guibg=#b2377a
-hi Todo         guifg=#54b900   guibg=#622098   gui=bold
+hi Todo guifg=#ffb0d3 guibg=#183058 gui=bold 
+hi link @nospell.comment Todo
 
 hi Pmenu        guifg=#6d6d6d   guibg=#002244
 hi PmenuSel     guifg=#5d5d5d   guibg=#001133

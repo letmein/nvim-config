@@ -1,12 +1,10 @@
 require('plugins')
-require('plugins.lspc')
 require('plugins.telescope')
-require('plugins.cmp')
 require('plugins.treesitter')
+require('plugins.lspc')
 require('plugins.nvim-tree')
-
 require('lualine').setup()
-require('elixir').setup()
+require('plugins.cmp')
 
 if vim.g.neovide then
   require('neovide')
@@ -33,3 +31,4 @@ vim.o.conceallevel = 0
 vim.g.indentLine_char = '▏'
 vim.g.indentLine_color_gui = '#303b4c'
 vim.g.vsnip_snippet_dir = '~/src/'
+
