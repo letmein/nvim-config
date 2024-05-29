@@ -1,6 +1,14 @@
 local telescope = require("telescope")
+local tb = require("telescope.builtin")
 local lga_actions = require("telescope-live-grep-args.actions")
 local lga_shortcuts = require("telescope-live-grep-args.shortcuts")
+
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+keymap('n', '<Leader>f', telescope.extensions.live_grep_args.live_grep_args, opts)
+keymap('v', '<Leader>f', lga_shortcuts.grep_visual_selection, opts)
+keymap('n', '<Leader>b', tb.current_buffer_fuzzy_find)
 
 telescope.setup {
   extensions = {

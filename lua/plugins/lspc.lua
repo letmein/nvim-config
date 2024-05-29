@@ -1,4 +1,5 @@
 vim.opt.signcolumn = "yes"
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "ruby",
   callback = function()
@@ -14,6 +15,7 @@ vim.api.nvim_create_autocmd("FileType", {
     }
   end,
 })
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "elixir",
   callback = function()
@@ -24,6 +26,7 @@ vim.api.nvim_create_autocmd("FileType", {
     }
   end,
 })
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "svelte",
   callback = function()
@@ -34,6 +37,7 @@ vim.api.nvim_create_autocmd("FileType", {
     }
   end,
 })
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "go",
   callback = function()
@@ -46,11 +50,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)

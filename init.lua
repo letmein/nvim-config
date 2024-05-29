@@ -3,8 +3,9 @@ require('plugins.telescope')
 require('plugins.treesitter')
 require('plugins.lspc')
 require('plugins.nvim-tree')
-require('lualine').setup()
 require('plugins.cmp')
+require('keymaps')
+require('terminal')
 
 if vim.g.neovide then
   require('neovide')
@@ -31,4 +32,10 @@ vim.o.conceallevel = 0
 vim.g.indentLine_char = '▏'
 vim.g.indentLine_color_gui = '#303b4c'
 vim.g.vsnip_snippet_dir = '~/src/'
+
+vim.g.git_messenger_always_into_popup = true
+vim.g.git_messenger_no_default_mappings = true
+vim.g['test#strategy'] = 'neovim'
+
+vim.cmd 'colorscheme softblue-custom'
 

@@ -8,6 +8,12 @@ if version > 580
   endif
 endif
 
+match ExtraWhitespace /\s\+$/
+
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+
 let g:colors_name="softblue-custom"
 
 " TODO: map colors to the scheme
@@ -54,10 +60,10 @@ hi Identifier   guifg=#00ac55
 hi Statement    guifg=SkyBlue2
 hi PreProc      guifg=#20a0d0
 
-hi Special      guifg=#af9a3e 
+hi Special      guifg=#af9a3e
 hi Ignore       guifg=grey40
 hi Error        guifg=white     guibg=#b2377a
-hi Todo guifg=#ffb0d3 guibg=#183058 gui=bold 
+hi Todo guifg=#ffb0d3 guibg=#183058 gui=bold
 hi link @nospell.comment Todo
 
 hi Pmenu        guifg=#6d6d6d   guibg=#002244
@@ -68,3 +74,4 @@ hi CursorLineNr guifg=SkyBlue3 gui=bold
 hi CursorLine   guibg=#002244
 
 hi EndOfBuffer guifg=bg
+hi ExtraWhitespace guibg=#660000

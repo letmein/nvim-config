@@ -41,31 +41,19 @@ return require('packer').startup(function()
   use 'hrsh7th/vim-vsnip'
 
   use 'pechorin/any-jump.vim'
+
   use 'rhysd/git-messenger.vim'
+  use 'tpope/vim-fugitive'
 
   use 'github/copilot.vim'
 
---[[
-  use { 
-    'Exafunction/codeium.vim',
-    config = function () 
-      vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
-      vim.keymap.set('i', '<C-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
-      vim.keymap.set('i', '<C-backslash>', function() return vim.fn['codeium#Complete']() end, { expr = true, silent = true })
-      vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-    end
-  }
-]]--
-
   use 'ap/vim-css-color'
-  use 'tpope/vim-fugitive'
-  use 'junegunn/vim-easy-align'
   use 'Yggdroot/indentLine'
   use 'https://github.com/keith/rspec.vim'
   use 'MarcWeber/vim-addon-mw-utils'
   use 'tomtom/tlib_vim'
   use 'janko/vim-test'
-  use 'easymotion/vim-easymotion'
+  use 'folke/flash.nvim'
   use 'pangloss/vim-javascript'
   use 'tpope/vim-projectionist'
   use 'tpope/vim-rhubarb'
@@ -81,7 +69,10 @@ return require('packer').startup(function()
   }
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function()
+      require('lualine').setup()
+    end
   }
   use 'kyazdani42/nvim-web-devicons'
 end)
