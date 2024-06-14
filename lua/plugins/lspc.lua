@@ -1,21 +1,16 @@
-vim.opt.signcolumn = "yes"
+local lspconfig = require('lspconfig')
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "ruby",
-  callback = function()
-    vim.lsp.start {
-      name = "rubocop",
-      cmd = { "bundle", "exec", "rubocop", "--lsp" },
-      root_dir = vim.fs.dirname(vim.fs.find({'Gemfile', '.git'}, { upward = true })[1]),
-    }
-    vim.lsp.start {
-      name = "solargraph",
-      cmd = { "bundle", "exec", "solargraph", "stdio" },
-      root_dir = vim.fs.dirname(vim.fs.find({'Gemfile', '.git'}, { upward = true })[1]),
-    }
-  end,
+lspconfig.solargraph.setup({
+  cmd = { "bundle", "exec", "solargraph", "stdio" },
+  root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
 })
 
+lspconfig.rubocop.setup({
+  cmd = { "bundle", "exec", "rubocop", "--lsp" },
+  root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+})
+
+--[[
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "elixir",
   callback = function()
@@ -48,6 +43,8 @@ vim.api.nvim_create_autocmd("FileType", {
     }
   end,
 })
+
+]]--
 
 local opts = { noremap=true, silent=true }
 vim.api.nvim_create_autocmd('LspAttach', {

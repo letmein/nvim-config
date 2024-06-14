@@ -1,3 +1,9 @@
+-- -----------------
+-- Global keymaps
+-- -----------------
+
+vim.keymap.set('n', '<Space>', '<Leader>', { noremap = false })
+
 vim.keymap.set('n', '<Leader>w', '<C-W>', { silent = true })
 
 -- Copy selection to the global buffer
@@ -19,7 +25,7 @@ vim.keymap.set('n', '<Leader>d', function()
 end, { silent = true })
 
 -- Disagnostics
-vim.keymap.set('n', '<Space>d', function()
+vim.keymap.set('n', '<Leader>e', function()
   vim.print('Diagnostics: [>] next  [<] prev  [o] open  [l] list')
   map_keys({
     ['>'] = vim.diagnostic.goto_next,
@@ -30,7 +36,7 @@ vim.keymap.set('n', '<Space>d', function()
 end)
 
 -- Git mappings
-vim.keymap.set('n', '<Space>g', function()
+vim.keymap.set('n', '<Leader>g', function()
   vim.print('Git: [b] branches  [l] blame line  [a] blame all  [g] browse  [s] status')
 
   local tb = require("telescope.builtin")
@@ -44,19 +50,13 @@ vim.keymap.set('n', '<Space>g', function()
 end)
 
 -- Flash
-vim.keymap.set('n', '<Space>s', function()
-  vim.print('Flash: [s] all  [w] word')
-
-  local flash = require('flash')
-  map_keys({
-    ['s'] = flash.jump,
-    ['w'] = function()
-      flash.jump({
-        pattern = vim.fn.expand("<cword>"),
-      })
-    end,
-  })
-end)
+local flash = require('flash')
+vim.keymap.set('n', 's', flash.jump)
+--[[
+flash.jump({
+  pattern = vim.fn.expand("<cword>"),
+})
+]]--
 
 function map_keys(mapping)
   local key = vim.fn.nr2char(vim.fn.getchar())

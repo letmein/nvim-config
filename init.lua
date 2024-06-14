@@ -11,6 +11,7 @@ if vim.g.neovide then
   require('neovide')
 end
 
+vim.o.signcolumn = "yes:1"
 vim.o.tabstop = 2
 vim.o.expandtab = true
 vim.o.cursorline = true

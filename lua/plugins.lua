@@ -60,6 +60,8 @@ return require('packer').startup(function()
   use 'rottencandy/vimkubectl'
   use 'lmintmate/blue-mood-vim'
 
+  use 'neovim/nvim-lspconfig'
+
   use {
     'kyazdani42/nvim-tree.lua',
     requires = {
